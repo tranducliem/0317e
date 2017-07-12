@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Category;
+use Session;
 
 class CategoryController extends Controller
 {
@@ -13,9 +14,14 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::all();
+        if ($request->has('keyword')) {
+            $keyword = $request->get('keyword');
+            $categories = Category::where('title', 'like', '%' . $keyword . '%')->get();
+        } else {
+            $categories = Category::all();
+        }
 
         return view('admin.category.show', [
             'abc' => $categories
@@ -29,7 +35,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        //Day la function create
+        return view('admin.category.create');
     }
 
     /**
@@ -40,7 +47,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $c = new Category();
+        $c->title = $request->title;
+        $c->status = $request->status;
+        $c->save();
+        Session::flash('success', "Tao moi thanh cong!");
+
+        return redirect('admin/category');
     }
 
     /**
@@ -62,7 +75,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cate = Category::findOrFail($id);
+
+        return view('admin.category.edit', ['cate' => $cate]);
     }
 
     /**
@@ -74,7 +89,13 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cate = Category::findOrFail($id);
+        $cate->title = $request->title;
+        $cate->status = $request->status;
+        $cate->save();
+        Session::flash('success', "Edit category successfully!!!");
+
+        return redirect('admin/category');
     }
 
     /**
@@ -85,6 +106,10 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cate = Category::findOrFail($id);
+        $cate->delete();
+        Session::flash('success', "Deleted category successfully!!!");
+
+        return redirect('admin/category');
     }
 }
