@@ -23,18 +23,18 @@
                     <div class="panel-body">
                         <div class="col-md-6">
                             {!! Form::open(['type' => 'POST', 'url' => 'admin/category', 'role' => 'form']) !!}
-                                <div class="form-group">
-                                    <label>Title</label>
-                                    <input class="form-control" name="title" placeholder="Title">
-                                </div>
-                                <div class="form-group">
-                                    <label>Status</label>
-                                    <select name="status" class="form-control">
-                                        <option value="enable">Enable</option>
-                                        <option value="disable">Disable</option>
-                                    </select>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Save</button>
+                            <div class="form-group">
+                                <label>Title</label>
+                                <input class="form-control" name="title" placeholder="Title">
+                            </div>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select name="status" class="form-control">
+                                    <option value="enable">Enable</option>
+                                    <option value="disable">Disable</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save</button>
                             {!! Form::close() !!}
                         </div>
                     </div>
