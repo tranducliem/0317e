@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Auth;
 
 class HomeController extends Controller
 {
+    private $_data;
+
     /**
      * Create a new controller instance.
      *
@@ -14,7 +17,8 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
+        $this->_data = array();
     }
 
     /**
@@ -24,6 +28,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $this->_data['products'] = Product::all();
+
+        return view('home', $this->_data);
     }
 }

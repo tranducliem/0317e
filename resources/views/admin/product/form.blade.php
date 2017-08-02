@@ -1,6 +1,7 @@
 <div class="form-group">
     <label>Title</label>
     {!! Form::text('title', null, [ 'class' => 'form-control', 'placeholder' => "Title"]) !!}
+    {!! $errors->first('title', '<span id="title-error" style="color: red" >:message</span>') !!}
 </div>
 <div class="form-group">
     <label>Category</label>
@@ -9,6 +10,7 @@
 <div class="form-group">
     <label>Price</label>
     {!! Form::text('price', null, [ 'class' => 'form-control', 'placeholder' => "Price"]) !!}
+    {!! $errors->first('price', '<span id="price-error" style="color: red" >:message</span>') !!}
 </div>
 <div class="form-group">
     <label>Thumbnail</label>

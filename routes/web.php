@@ -11,9 +11,12 @@
 |
 */
 
-Route::get('/', function () { return view('welcome'); });
 Auth::routes();
-Route::get('/home', 'HomeController@index');
+Route::get('/', 'HomeController@index');
+Route::get('home', 'HomeController@index');
+Route::get('cart', 'CartController@index');
+Route::get('cart/add/{id}', 'CartController@store');
+Route::get('cart/destroy', 'CartController@destroy');
 
 Route::group(['middleware' => ['auth']], function (){
     //login thi vao duoc ko can phai la admin
